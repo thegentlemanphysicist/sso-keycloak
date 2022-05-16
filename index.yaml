@@ -2,17 +2,28 @@ apiVersion: v1
 entries:
   kc-cron-job:
   - apiVersion: v1
-    created: "2021-12-09T18:26:56.522850977Z"
+    created: "2022-05-16T19:51:16.767672977Z"
     description: Helm chart for CronJob to collect Keycloak active sessions
-    digest: 49c5c7d4bd9ab9dabbd49c8ba36bf04c8df6e254d869e1e005fb3261cdea7558
+    digest: 6dff1804a700b5d593c3b24c9a781730bde66aec0fbe6cbe7466f4449464dbc5
     name: kc-cron-job
     urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/kc-cron-job-0.1.1/kc-cron-job-0.1.1.tgz
+    - https://github.com/thegentlemanphysicist/sso-keycloak/releases/download/kc-cron-job-0.1.1/kc-cron-job-0.1.1.tgz
     version: 0.1.1
+  metabase:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-16T19:51:16.968624518Z"
+    description: A Helm chart for metabase
+    digest: eaf0976e25c5cf46a25e80cc93a81b769f1aefed3c303431ab70fa42bdeadc8e
+    name: metabase
+    type: application
+    urls:
+    - https://github.com/thegentlemanphysicist/sso-keycloak/releases/download/metabase-0.1.0/metabase-0.1.0.tgz
+    version: 0.1.0
   patroni:
   - apiVersion: v1
     appVersion: 1.5-p5
-    created: "2021-12-15T20:02:13.313223638Z"
+    created: "2022-05-16T19:51:17.188700193Z"
     dependencies:
     - condition: etcd.deployChart
       name: etcd
@@ -27,199 +38,33 @@ entries:
       repository: https://charts.helm.sh/stable
       version: 3.6.1
     description: 'Highly available elephant herd: HA PostgreSQL cluster.'
-    digest: de1fce2962e831601d16b190c6cfd3f149446ded9bbdf3f1e30347b8a7da1ae4
+    digest: 484472444abb3f7083ff4b7e6e7e6fd907662e8002d5c659d3cd3654f7a7865d
     home: https://github.com/zalando/patroni
     name: patroni
     sources:
     - https://github.com/zalando/patroni
     - https://github.com/zalando/spilo
     urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/patroni-0.16.8/patroni-0.16.8.tgz
-    version: 0.16.8
-  - apiVersion: v1
-    appVersion: 1.5-p5
-    created: "2021-12-09T21:41:37.112831626Z"
-    dependencies:
-    - condition: etcd.deployChart
-      name: etcd
-      repository: https://charts.helm.sh/incubator
-      version: 0.6.2
-    - condition: zookeeper.deployChart
-      name: zookeeper
-      repository: https://charts.helm.sh/incubator
-      version: 1.0.0
-    - condition: consul.deployChart
-      name: consul
-      repository: https://charts.helm.sh/stable
-      version: 3.6.1
-    description: 'Highly available elephant herd: HA PostgreSQL cluster.'
-    digest: bcd4a3b92783487de449c6e41d3c4deea1a4e6ba10df38a5f701d94df546a870
-    home: https://github.com/zalando/patroni
-    name: patroni
-    sources:
-    - https://github.com/zalando/patroni
-    - https://github.com/zalando/spilo
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/patroni-0.16.7/patroni-0.16.7.tgz
-    version: 0.16.7
-  - apiVersion: v1
-    appVersion: 1.5-p5
-    created: "2021-12-09T21:01:37.824002848Z"
-    dependencies:
-    - condition: etcd.deployChart
-      name: etcd
-      repository: https://charts.helm.sh/incubator
-      version: 0.6.2
-    - condition: zookeeper.deployChart
-      name: zookeeper
-      repository: https://charts.helm.sh/incubator
-      version: 1.0.0
-    - condition: consul.deployChart
-      name: consul
-      repository: https://charts.helm.sh/stable
-      version: 3.6.1
-    description: 'Highly available elephant herd: HA PostgreSQL cluster.'
-    digest: 1714b23499788a31ceff3e15f45d99f5bd7e9e7a24b525db9364d0ee64ff1c25
-    home: https://github.com/zalando/patroni
-    name: patroni
-    sources:
-    - https://github.com/zalando/patroni
-    - https://github.com/zalando/spilo
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/patroni-0.16.5/patroni-0.16.5.tgz
-    version: 0.16.5
-  - apiVersion: v1
-    appVersion: 1.5-p5
-    created: "2021-12-09T20:07:24.636907912Z"
-    dependencies:
-    - condition: etcd.deployChart
-      name: etcd
-      repository: https://charts.helm.sh/incubator
-      version: 0.6.2
-    - condition: zookeeper.deployChart
-      name: zookeeper
-      repository: https://charts.helm.sh/incubator
-      version: 1.0.0
-    - condition: consul.deployChart
-      name: consul
-      repository: https://charts.helm.sh/stable
-      version: 3.6.1
-    description: 'Highly available elephant herd: HA PostgreSQL cluster.'
-    digest: 2bcc4499ed9759d684a2010f7ad4430f92ae4e9f33892b1e2eba2b6bc37b181b
-    home: https://github.com/zalando/patroni
-    name: patroni
-    sources:
-    - https://github.com/zalando/patroni
-    - https://github.com/zalando/spilo
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/patroni-0.16.4/patroni-0.16.4.tgz
-    version: 0.16.4
+    - https://github.com/thegentlemanphysicist/sso-keycloak/releases/download/patroni-0.17.8/patroni-0.17.8.tgz
+    version: 0.17.8
   secrets:
   - apiVersion: v1
-    created: "2021-12-09T18:26:56.680139351Z"
+    created: "2022-05-16T19:51:17.394191242Z"
     description: Helm chart for Secrets
-    digest: d91b025a1ffddd688144e14448045f9d06106ed7681538a16b8d9f72375d2396
+    digest: 84a6d312f8046a979acaf755b7706665797c5f3c0ab84366cecf6193bb60b3e6
     name: secrets
     urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/secrets-0.1.1/secrets-0.1.1.tgz
+    - https://github.com/thegentlemanphysicist/sso-keycloak/releases/download/secrets-0.1.1/secrets-0.1.1.tgz
     version: 0.1.1
-  - apiVersion: v1
-    created: "2021-10-12T22:53:12.207821795Z"
-    description: Helm chart for Secrets
-    digest: 2a6e8be3918a0e3963ac49ae120d86461f0d79aec13be17beb7e450840b90a90
-    name: secrets
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/secrets-0.1.0/secrets-0.1.0.tgz
-    version: 0.1.0
   sso-keycloak:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-01-19T00:47:40.126254593Z"
+    created: "2022-05-16T19:51:17.592268379Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: f417d571ce3155793955faebd01813a286805a285dd1114e61c00c98c24f2257
+    digest: 5579a956213fb18417bbfb189525535b4dc677b2fa772b5569607abb9982fd1a
     name: sso-keycloak
     urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.8/sso-keycloak-0.1.8.tgz
+    - https://github.com/thegentlemanphysicist/sso-keycloak/releases/download/sso-keycloak-0.1.8/sso-keycloak-0.1.8.tgz
     version: 0.1.8
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-15T20:02:13.480791441Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: 143b0a389f48040354eaab734f664688fd77126fc01a5d040eb83200ab273399
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.7/sso-keycloak-0.1.7.tgz
-    version: 0.1.7
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-10T00:20:56.768620007Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: 3a8c72701cc94fbcea9a8e6c49f70cb49203978d1774b013a2ab28e60f907031
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.6/sso-keycloak-0.1.6.tgz
-    version: 0.1.6
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-09T23:54:54.325313379Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: ec6ec0c64a454adf05ddfafe81bd0038d8459ff9506cc39bca08395acacbfbd5
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.5/sso-keycloak-0.1.5.tgz
-    version: 0.1.5
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-09T23:41:01.656823999Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: e308efbb8d23e6653b4c88c7bcbab133a231c53ee177df2b50d45ffe4ede2634
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.4/sso-keycloak-0.1.4.tgz
-    version: 0.1.4
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-09T23:35:13.232065214Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: 93f4fcfea74c78e3be260fb18e5e00319f258ac7921820b8dab71dda056e3ddc
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.3/sso-keycloak-0.1.3.tgz
-    version: 0.1.3
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-09T23:26:01.7868421Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: 08de47ec2651bfbc922135ddea6127d5810caa06e9f0d5746ded2180bcbd2c3e
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.2/sso-keycloak-0.1.2.tgz
-    version: 0.1.2
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-12-09T18:26:56.856176371Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: b0b6e6e74443b8466d48a06c166b3fc2250dd15a0485436dfb124ad2543d285e
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.1/sso-keycloak-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v1
-    appVersion: 0.1.0
-    created: "2021-10-12T22:53:12.436562237Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: e5aaa3e9e749be04abde3c17cd26d043ae5739acc6255a5c51fc4c993383f4cd
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-keycloak/releases/download/sso-keycloak-0.1.0/sso-keycloak-0.1.0.tgz
-    version: 0.1.0
-generated: "2022-01-19T00:47:40.126469494Z"
+generated: "2022-05-16T19:51:17.592283679Z"
