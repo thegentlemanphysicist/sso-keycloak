@@ -15,7 +15,7 @@ fi
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 
 # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
-echo ${fromJSON(OUTPUT)}
+# echo ${fromJSON(OUTPUT)}
 STATE = $(echo ${OUTPUT} | jq '.state')
 echo "The state is ${STATE}"
 
