@@ -11,7 +11,7 @@ if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     echo "invalid context"
     exit 1
 fi
-STATE=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni) | jq .state 
+STATE=$( $(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni) | jq .state )
 
 # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
 echo "The state is ${STATE}"

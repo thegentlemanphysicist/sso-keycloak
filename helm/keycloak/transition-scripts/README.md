@@ -1,0 +1,1 @@
+The scripts here are used by the gihub actions to change the states of the gold and golddr from active mode to passive mode.
