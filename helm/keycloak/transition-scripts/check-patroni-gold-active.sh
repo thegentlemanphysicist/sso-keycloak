@@ -14,7 +14,7 @@ fi
 
 STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
 
-if ${STATE} != "running"; then
+if [${STATE} != "running"]; then
     echo "The gold patroni pods must be running"
     exit 1
 fi
