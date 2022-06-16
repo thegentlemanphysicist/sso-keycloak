@@ -6,14 +6,14 @@ pwd="$(dirname "$0")"
 
 source "./helpers.sh"
 
-
+# Confirm that this action is running against gold cluster
 if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     echo "invalid context"
     exit 1
 fi
 
 
-# Check that patroni pods are in a running state
+# Confirm that patroni pods are in a running state
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 STATE=$(echo $OUTPUT | jq '.state')
 if [[ $STATE == '"running"' ]]; then
@@ -27,6 +27,7 @@ fi
 # Confirm that patroni gold is in active state
 RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
 RESPONSE_CODE=${RESPONSE: -4}
+echo "The response code is "$RESPONSE_CODE
 GOLDCONFIG=${RESPONSE:0:-3}
 STANDBY_CLUSTER=$(echo $GOLDCONFIG | jq .standby_cluster )
 
