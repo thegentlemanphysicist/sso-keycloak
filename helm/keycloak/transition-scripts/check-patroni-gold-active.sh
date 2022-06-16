@@ -24,7 +24,8 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 echo $OUTPUT
 echo "Test state is"
 echo $OUTPUT | jq '.state'
-STATE=`echo $OUTPUT | jq '.state'`
+# STATE=`echo $OUTPUT | jq '.state'`
+STATE=$(echo $OUTPUT | jq '.state')
 echo "The state is $STATE"
 
 # if [${STATE} != "running"]; then
@@ -35,7 +36,8 @@ echo "The state is $STATE"
 #TODO If the connection fails entirely this will default to null, must add a check for the success
 GOLDCONFIG=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/config)
 echo ${GOLDCONFIG}
-STANDBY_CLUSTER = ${GOLDCONFIG} | jq .standby_cluster
+STANDBY_CLUSTER=$($GOLDCONFIG | jq .standby_cluster )
+
 # if [ -z ${STANDBY_CLUSTER} ]; then
 #     echo "The gold patroni pods must not be in standby mode"
 #     exit 1
