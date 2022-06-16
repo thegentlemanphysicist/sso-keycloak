@@ -15,20 +15,20 @@ fi
 
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 
-# STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
-# echo ${fromJSON(OUTPUT)}
-# STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
-# json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
-# echo $json_var | jq '.[].name'
+# # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
+# # echo ${fromJSON(OUTPUT)}
+# # STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
+# # json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
+# # echo $json_var | jq '.[].name'
 
-echo $OUTPUT
-echo "Test state is"
-echo $OUTPUT | jq '.state'
-# STATE=`echo $OUTPUT | jq '.state'`
+# echo $OUTPUT
+# echo "Test state is"
+# echo $OUTPUT | jq '.state'
+# # STATE=`echo $OUTPUT | jq '.state'`
 STATE=$(echo $OUTPUT | jq '.state')
 echo "The state is $STATE"
 
-if [$STATE != "running"]; then
+if [ $STATE != "running" ]; then
     echo "The gold patroni pods must be running"
     exit 1
 fi
