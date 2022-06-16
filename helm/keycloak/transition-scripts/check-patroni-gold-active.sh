@@ -12,8 +12,6 @@ if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     exit 1
 fi
 
-apt install -y jq
-
 
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 
