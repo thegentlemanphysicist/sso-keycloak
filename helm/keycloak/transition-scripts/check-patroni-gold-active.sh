@@ -21,9 +21,9 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 # json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
 # echo $json_var | jq '.[].name'
 
-echo OUTPUT
+echo $OUTPUT
 
-STATE = $(echo ${OUTPUT} | jq '.state')
+STATE = $(echo $OUTPUT | jq '.state')
 echo "The state is ${STATE}"
 
 # if [${STATE} != "running"]; then
