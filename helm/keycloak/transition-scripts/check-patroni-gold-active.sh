@@ -26,7 +26,7 @@ fi
 
 # Confirm that patroni gold is in active state
 RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
-RESPONSE_CODE=${RESPONSE: -4}
+RESPONSE_CODE=${RESPONSE: -3}
 echo "The response code is "$RESPONSE_CODE
 GOLDCONFIG=${RESPONSE:0:-3}
 STANDBY_CLUSTER=$(echo $GOLDCONFIG | jq .standby_cluster )
