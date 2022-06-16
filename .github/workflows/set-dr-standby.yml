@@ -47,10 +47,9 @@ jobs:
           insecure_skip_tls_verify: true
       - name: Deploy keycloak-dr in standby mode
         run: |
-          chmod +x ./transition-scripts/deploy-golddr-standby.sh
-          ./transition-scripts/deploy-golddr-standby.sh ${{ github.event.inputs.namespace }}
+          chmod +x ./helm/keycloak/transition-scripts/deploy-golddr-standby.sh
+          ./helm/keycloak/transition-scripts/deploy-golddr-standby.sh ${{ github.event.inputs.namespace }}
         shell: bash
-        working-directory: helm/keycloak
       - name: Set patroni-dr to standby
         run: |
           chmod +x ./keycloak/transition-scripts/set-patroni-dr-standby.sh
