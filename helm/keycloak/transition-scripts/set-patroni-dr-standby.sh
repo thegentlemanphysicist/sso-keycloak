@@ -13,11 +13,11 @@ if ! check_kube_context "api-golddr-devops-gov-bc-ca"; then
     exit 1
 fi
 
+# Set the patroni config to be in standby mode
 RESPONSE=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" -XPATCH -d '{"standby_cluster": {"create_replica_methods": ["basebackup_fast_xlog"],"host": "sso-patroni-gold.c6af30-test.svc.cluster.local","port": '$PORT'}}' http://localhost:8008/config)
 RESPONSE_CODE=${RESPONSE: -3}
 PATRONIDRCONFIG=${RESPONSE:0:-3}
-echo $RESPONSE_CODE
-echo $PATRONIDRCONFIG
+echo "The response code is: "$RESPONSE_CODE
 
 if [ $RESPONSE_CODE = 200 ]; then
     echo "Patroni config response returned"
