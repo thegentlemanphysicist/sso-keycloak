@@ -16,7 +16,8 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 
 # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
 # echo ${fromJSON(OUTPUT)}
-STATE = $(echo ${OUTPUT} | jq '.state')
+STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
+# STATE = $(echo ${OUTPUT} | jq '.state')
 echo "The state is ${STATE}"
 
 # if [${STATE} != "running"]; then
