@@ -31,7 +31,7 @@ echo "The response code is "$RESPONSE_CODE
 GOLDCONFIG=${RESPONSE:0:-3}
 STANDBY_CLUSTER=$(echo $GOLDCONFIG | jq .standby_cluster )
 
-if [ $RESPONSE = 200 ]; then
+if [[ $RESPONSE == 200 ]]; then
     echo "Patroni config response returned"
 else
     echo "The gold patroni pods did not return a 200 response"
