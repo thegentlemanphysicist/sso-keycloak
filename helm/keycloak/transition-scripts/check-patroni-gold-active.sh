@@ -13,10 +13,9 @@ if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
 fi
 
 
+# Check that patroni pods are in a running state
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
-
 STATE=$(echo $OUTPUT | jq '.state')
-
 if [[ $STATE == '"running"' ]]; then
     echo "The gold patroni pod is running"
 else
@@ -24,15 +23,12 @@ else
     exit 1
 fi
 
-#TODO If the connection fails entirely this will default to null, must add a check for the success
-RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
 
+# Confirm that patroni gold is in active state
+RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
 RESPONSE_CODE=${RESPONSE: -4}
 GOLDCONFIG=${RESPONSE:0:-3}
-# GOLDCONFIG=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/config)
-echo ${GOLDCONFIG}
 STANDBY_CLUSTER=$(echo $GOLDCONFIG | jq .standby_cluster )
-
 
 if [ $RESPONSE != 200 ]; then
     echo "The gold patroni pods did not return a 200 response"
