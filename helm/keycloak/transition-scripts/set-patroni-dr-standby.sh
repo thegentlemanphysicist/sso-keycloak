@@ -19,11 +19,11 @@ PATRONIDRCONFIG=${RESPONSE:0:-3}
 echo $RESPONSE_CODE
 echo $PATRONIDRCONFIG
 
-if [ $RESPONSE_CODE != 200 ]; then
+if [ $RESPONSE_CODE = 200 ]; then
+    echo "Patroni config response returned"
+else
     echo "The golddr patroni instance did not return a 200 response"
     exit 1
-else
-    echo "Patroni config response returned"
 fi
 
 if [ -z $(echo $OUTPUT | jq .standby_cluster) ]; then
