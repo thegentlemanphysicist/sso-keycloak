@@ -22,7 +22,8 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 # echo $json_var | jq '.[].name'
 
 echo $OUTPUT
-
+echo "Test state is"
+echo $OUTPUT | jq '.state'
 STATE = $(echo $OUTPUT | jq '.state')
 echo "The state is ${STATE}"
 
