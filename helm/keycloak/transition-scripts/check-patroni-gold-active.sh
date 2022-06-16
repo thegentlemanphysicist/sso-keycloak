@@ -12,12 +12,15 @@ if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     exit 1
 fi
 
+apt install -y jq
+
+
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 
 # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
 # echo ${fromJSON(OUTPUT)}
-STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
-# STATE = $(echo ${OUTPUT} | jq '.state')
+# STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
+STATE = $(echo ${OUTPUT} | jq '.state')
 echo "The state is ${STATE}"
 
 # if [${STATE} != "running"]; then
