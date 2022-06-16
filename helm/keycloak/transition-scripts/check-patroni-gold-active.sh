@@ -18,8 +18,10 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
 # echo ${fromJSON(OUTPUT)}
 # STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
-json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
-echo $json_var | jq '.[].name'
+# json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
+# echo $json_var | jq '.[].name'
+
+echo OUTPUT
 
 STATE = $(echo ${OUTPUT} | jq '.state')
 echo "The state is ${STATE}"
