@@ -15,18 +15,7 @@ fi
 
 OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/patroni)
 
-# # STATE=$(oc rsh -n ${NAMESPACE} sso-patroni-0 curl -s http://localhost:8008/patroni | jq .state) 
-# # echo ${fromJSON(OUTPUT)}
-# # STATE = $(grep -Po '"state":.*?[^\\]",' $OUTPUT)
-# # json_var='[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
-# # echo $json_var | jq '.[].name'
-
-# echo $OUTPUT
-# echo "Test state is"
-# echo $OUTPUT | jq '.state'
-# # STATE=`echo $OUTPUT | jq '.state'`
 STATE=$(echo $OUTPUT | jq '.state')
-echo "The state is $STATE"
 
 if [[ $STATE == '"running"' ]]; then
     echo "The gold patroni pod is running"
@@ -36,16 +25,23 @@ else
 fi
 
 #TODO If the connection fails entirely this will default to null, must add a check for the success
-GOLDCONFIG=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/config)
+RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
+
+RESPONSE_CODE=${OUTPUT: -4}
+GOLDCONFIG=${OUTPUT:0:-3}
+# GOLDCONFIG=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/config)
 echo ${GOLDCONFIG}
 STANDBY_CLUSTER=$($GOLDCONFIG | jq .standby_cluster )
 
-# if [ -z ${STANDBY_CLUSTER} ]; then
-#     echo "The gold patroni pods must not be in standby mode"
-#     exit 1
-# fi
+
+if [ $RESPONSE != 200 ]; then
+    echo "The gold patroni pods did not return a 200 response"
+    exit 1
+fi
+
+if [ -z ${STANDBY_CLUSTER} ]; then
+    echo "The gold patroni pods must not be in standby mode"
+    exit 1
+fi
 
 #TODO: Check that the TSC service is running?
-
-
-# kubectl -n c6af30-test exec sso-patroni-0 -- curl -s http://localhost:8008/config | jq .
