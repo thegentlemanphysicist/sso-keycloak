@@ -26,6 +26,7 @@ jobs:
           namespace: ${{ github.event.inputs.namespace }}
           insecure_skip_tls_verify: true
       - name: Check that sso-patroni gold is active
+        uses: sergeysova/jq-action@v2
         id: goldactive
         run: |
           chmod +x ./keycloak/transition-scripts/check-patroni-gold-active.sh
