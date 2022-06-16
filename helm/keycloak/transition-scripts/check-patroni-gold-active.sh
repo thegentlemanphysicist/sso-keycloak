@@ -27,8 +27,8 @@ fi
 #TODO If the connection fails entirely this will default to null, must add a check for the success
 RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" http://localhost:8008/config)
 
-RESPONSE_CODE=${OUTPUT: -4}
-GOLDCONFIG=${OUTPUT:0:-3}
+RESPONSE_CODE=${RESPONSE: -4}
+GOLDCONFIG=${RESPONSE:0:-3}
 # GOLDCONFIG=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost:8008/config)
 echo ${GOLDCONFIG}
 STANDBY_CLUSTER=$(echo $GOLDCONFIG | jq .standby_cluster )
