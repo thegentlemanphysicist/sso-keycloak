@@ -28,9 +28,7 @@ OUTPUT=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s http://localhost
 STATE=$(echo $OUTPUT | jq '.state')
 echo 'The state is "$STATE"'
 
-if [ "$STATE" = "running" ]; then
-    echo "The gold patroni pod is running"
-else
+if [[ "$STATE" != "running" ]]; then
     echo "The gold patroni pods must be running"
     exit 1
 fi
