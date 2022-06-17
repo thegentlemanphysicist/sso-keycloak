@@ -30,9 +30,8 @@ RESPONSE=$(kubectl -n ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code
 RESPONSE_CODE=${RESPONSE: -3}
 echo "The response code is "$RESPONSE_CODE
 CLUSTERCONFIG=${RESPONSE:0:-3}
-echo $CLUSTERCONFIG
 STANDBY_CLUSTER_CONFIG_LENGTH=$(echo $CLUSTERCONFIG | jq .standby_cluster | jq length )
-echo $STANDBY_CLUSTER_CONFIG_LENGTH
+echo "The length of the standby config json is: "$STANDBY_CLUSTER_CONFIG_LENGTH
 if [[ $RESPONSE_CODE == 200 ]]; then
     echo "Patroni config response returned"
 else

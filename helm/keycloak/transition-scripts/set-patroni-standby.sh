@@ -22,13 +22,14 @@ if [ $CLUSTER == golddr ]; then
 else
     HOST="sso-patroni-golddr.${NAMESPACE}.svc.cluster.local"
 fi
-
+echo $HOST
+echo '{"standby_cluster": {"create_replica_methods": ["basebackup_fast_xlog"],"host": "'$HOST'","port": '$PORT'}}'
 # Set the patroni config to be in standby mode
 RESPONSE=$(kubectl -n  ${NAMESPACE} exec sso-patroni-0 -- curl -s -w "%{http_code}" -XPATCH -d '{"standby_cluster": {"create_replica_methods": ["basebackup_fast_xlog"],"host": '$HOST',"port": '$PORT'}}' http://localhost:8008/config)
 RESPONSE_CODE=${RESPONSE: -3}
 CLUSTERCONFIG=${RESPONSE:0:-3}
 echo "The response code is: "$RESPONSE_CODE
-
+echo $CLUSTERCONFIG
 if [ $RESPONSE_CODE = 200 ]; then
     echo "Patroni-$CLUSTER config response returned"
 else
