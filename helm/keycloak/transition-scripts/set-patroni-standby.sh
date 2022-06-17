@@ -18,9 +18,9 @@ if ! check_kube_context "api-$CLUSTER-devops-gov-bc-ca"; then
 fi
 
 if [ $CLUSTER == golddr ]; then
-    $HOST="sso-patroni-gold.${NAMESPACE}.svc.cluster.local"
+    HOST="sso-patroni-gold.${NAMESPACE}.svc.cluster.local"
 else
-    $HOST="sso-patroni-golddr.${NAMESPACE}.svc.cluster.local"
+    HOST="sso-patroni-golddr.${NAMESPACE}.svc.cluster.local"
 fi
 
 # Set the patroni config to be in standby mode
