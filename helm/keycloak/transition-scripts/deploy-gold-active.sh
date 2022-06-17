@@ -6,7 +6,7 @@ NAMESPACE=$1
 pwd="$(dirname "$0")"
 source "$pwd/../../helpers.sh"
 
-if ! check_kube_context "api-golddr-devops-gov-bc-ca"; then
+if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     echo "invalid context"
     exit 1
 fi
