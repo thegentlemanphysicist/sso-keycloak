@@ -12,7 +12,7 @@ jobs:
   set-gold-to-active:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.dractivation.outputs.patroniconfig }}
+      output1: ${{ steps.goldactivation.outputs.patroniconfig }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,8 +23,8 @@ jobs:
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN_GOLD }}
           namespace: ${{ github.event.inputs.namespace }}
           insecure_skip_tls_verify: true
-      - name: Set patroni-dr to primary
-        id: dractivation
+      - name: Set patroni-gold to primary
+        id: goldactivation
         run: |
           chmod +x ./keycloak/transition-scripts/set-patroni-active.sh
           ./keycloak/transition-scripts/set-patroni-active.sh ${{ github.event.inputs.namespace }} gold
@@ -44,7 +44,7 @@ jobs:
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN_GOLD }}
           namespace: ${{ github.event.inputs.namespace }}
           insecure_skip_tls_verify: true
-      - name: Deploy keycloak-dr in active mode
+      - name: Deploy keycloak gold in active mode
         run: |
           chmod +x ./keycloak/transition-scripts/deploy-gold-active.sh
           ./keycloak/transition-scripts/deploy-gold-active.sh ${{ github.event.inputs.namespace }}
