@@ -41,7 +41,7 @@ else
 fi
 
 # The length of the standby config json is 0 when patroni is in active mode
-if [ -z $STANDBY_CLUSTER_CONFIG_LENGTH ]; then
+if [[ $STANDBY_CLUSTER_CONFIG_LENGTH == 0 ]]; then
     echo "Patroni $CLUSTER config in active mode"
 else
     echo "The $CLUSTER patroni pods must not be in standby mode"
