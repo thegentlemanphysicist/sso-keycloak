@@ -5,5 +5,5 @@ patroni:
 
   standby:
     enabled: true
-    host: sso-patroni-gold.c6af30-test.svc.cluster.local
+    host: sso-patroni-golddr.c6af30-test.svc.cluster.local
     port: 56583
