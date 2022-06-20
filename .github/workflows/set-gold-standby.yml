@@ -54,3 +54,9 @@ jobs:
           ./keycloak/transition-scripts/set-patroni-standby.sh ${{ github.event.inputs.namespace }} ${{ github.event.inputs.patroni-port }} gold
         shell: bash
         working-directory: helm
+      - name: Deploy keycloak-gold in standby mode
+        run: |
+          chmod +x ./keycloak/transition-scripts/deploy-gold-standby.sh
+          ./keycloak/transition-scripts/deploy-gold-standby.sh ${{ github.event.inputs.namespace }}
+        shell: bash
+        working-directory: helm
