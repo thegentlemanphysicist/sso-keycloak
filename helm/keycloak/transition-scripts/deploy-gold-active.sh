@@ -6,7 +6,7 @@ NAMESPACE=$1
 pwd="$(dirname "$0")"
 source "$pwd/../../helpers.sh"
 
-if ! check_kube_context "api-golddr-devops-gov-bc-ca"; then
+if ! check_kube_context "api-gold-devops-gov-bc-ca"; then
     echo "invalid context"
     exit 1
 fi
@@ -17,5 +17,6 @@ helm repo update
 cd ./keycloak/
 
 helm upgrade --install sso-keycloak sso-charts/sso-keycloak \
- -n ${NAMESPACE} -f ./values-golddr-${NAMESPACE}.yaml  \
- -f ./transition-values/set-dr-to-active-${NAMESPACE}.yaml --version v1.6.0
+ -n ${NAMESPACE} -f ./values-gold-${NAMESPACE}.yaml  \
+ --version v1.7.1
+

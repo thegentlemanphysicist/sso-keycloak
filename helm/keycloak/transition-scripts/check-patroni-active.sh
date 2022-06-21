@@ -3,7 +3,7 @@
 NAMESPACE=$1
 
 CLUSTER=$2
-# c6af30-test golddr
+
 pwd="$(dirname "$0")"
 source "$pwd/../../helpers.sh"
 
@@ -32,6 +32,8 @@ echo "The response code is "$RESPONSE_CODE
 CLUSTERCONFIG=${RESPONSE:0:-3}
 STANDBY_CLUSTER_CONFIG_LENGTH=$(echo $CLUSTERCONFIG | jq .standby_cluster | jq length )
 
+echo "The length of the standby config json is: "$STANDBY_CLUSTER_CONFIG_LENGTH
+
 if [[ $RESPONSE_CODE == 200 ]]; then
     echo "Patroni config response returned"
 else
@@ -40,7 +42,7 @@ else
 fi
 
 # The length of the standby config json is 0 when patroni is in active mode
-if [ -z $STANDBY_CLUSTER_CONFIG_LENGTH ]; then
+if [[ $STANDBY_CLUSTER_CONFIG_LENGTH == 0 ]]; then
     echo "Patroni $CLUSTER config in active mode"
 else
     echo "The $CLUSTER patroni pods must not be in standby mode"
